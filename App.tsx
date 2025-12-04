@@ -89,6 +89,16 @@ const App: React.FC = () => {
 
   const DetailsRinklPage = () => (
     <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-20">
+      <button 
+        onClick={() => handleNavigate('home')}
+        className="mb-6 p-2 -ml-2 text-gray-500 hover:text-rinklBlue dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+        aria-label="Back"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </button>
+
       <h1 className="text-3xl font-extrabold mb-2">{t.details_rinkl.title}</h1>
       <p className="text-sm font-mono text-gray-500 dark:text-gray-400 mb-8 uppercase tracking-widest">{t.details_rinkl.release}</p>
       
@@ -104,6 +114,16 @@ const App: React.FC = () => {
 
   const DetailsTelegramPage = () => (
     <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-20">
+      <button 
+        onClick={() => handleNavigate('home')}
+        className="mb-6 p-2 -ml-2 text-gray-500 hover:text-rinklBlue dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+        aria-label="Back"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </button>
+
       <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-extrabold">{t.details_telegram.title}</h1>
           <a 
