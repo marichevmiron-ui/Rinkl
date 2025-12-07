@@ -145,7 +145,7 @@ const App: React.FC = () => {
         {/* Footer Button - Fixed outside the animated container */}
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-center z-50">
             <a 
-                href="https://ai.rinkl.ru" 
+                href="https://rinkl-ai.vercel.app" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-rinklBlue text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-lg w-full max-w-md text-center"
