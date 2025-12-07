@@ -70,14 +70,7 @@ const App: React.FC = () => {
       <div className="flex items-baseline">
         <span className="text-2xl font-black text-black dark:text-white tracking-tighter mr-[1px]" style={{ fontFamily: 'Inter, sans-serif' }}>N</span>
         <span className="text-2xl font-black text-black dark:text-white tracking-tighter mr-[2px]" style={{ fontFamily: 'Inter, sans-serif' }}>K</span>
-        
-        {/* Custom L (1.5x larger bottom) */}
-        <div className="relative h-[20px] w-[22px] flex items-end">
-             {/* Vertical */}
-             <div className="h-[18px] w-[5px] bg-black dark:bg-white absolute left-0 bottom-0"></div>
-             {/* Horizontal (Extended 1.5x) */}
-             <div className="h-[5px] w-[22px] bg-black dark:bg-white absolute left-0 bottom-0"></div>
-        </div>
+        <span className="text-2xl font-black text-black dark:text-white tracking-tighter" style={{ fontFamily: 'Inter, sans-serif' }}>L</span>
       </div>
     </div>
   );
