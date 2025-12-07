@@ -45,6 +45,43 @@ const App: React.FC = () => {
 
   // --- Sub-components ---
   
+  const RinklLogo = () => (
+    <div 
+      onClick={handleLogoClick}
+      className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center h-full cursor-pointer hover:opacity-90 transition-opacity select-none"
+    >
+      {/* R */}
+      <span className="text-2xl font-black text-black dark:text-white tracking-tighter" style={{ fontFamily: 'Inter, sans-serif' }}>R</span>
+      
+      {/* Spacer 1 (Equal) */}
+      <div className="w-[8px]"></div>
+
+      {/* Slashes */}
+      <div className="flex items-center gap-[2px]">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="w-[4px] h-[20px] bg-[#007bff] transform -skew-x-[20deg]" />
+        ))}
+      </div>
+
+      {/* Spacer 2 (Equal) */}
+      <div className="w-[8px]"></div>
+
+      {/* N K L */}
+      <div className="flex items-baseline">
+        <span className="text-2xl font-black text-black dark:text-white tracking-tighter mr-[1px]" style={{ fontFamily: 'Inter, sans-serif' }}>N</span>
+        <span className="text-2xl font-black text-black dark:text-white tracking-tighter mr-[2px]" style={{ fontFamily: 'Inter, sans-serif' }}>K</span>
+        
+        {/* Custom L (1.5x larger bottom) */}
+        <div className="relative h-[20px] w-[22px] flex items-end">
+             {/* Vertical */}
+             <div className="h-[18px] w-[5px] bg-black dark:bg-white absolute left-0 bottom-0"></div>
+             {/* Horizontal (Extended 1.5x) */}
+             <div className="h-[5px] w-[22px] bg-black dark:bg-white absolute left-0 bottom-0"></div>
+        </div>
+      </div>
+    </div>
+  );
+  
   const HomePage = () => (
     <div className="flex flex-col justify-center min-h-[70vh] max-w-5xl mx-auto px-6 py-12 animate-fade-in">
       <div className="flex flex-col space-y-12 md:space-y-16">
@@ -88,73 +125,82 @@ const App: React.FC = () => {
   );
 
   const DetailsRinklPage = () => (
-    <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-20">
-      <button 
-        onClick={() => handleNavigate('home')}
-        className="mb-6 p-2 -ml-2 text-gray-500 hover:text-rinklBlue dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-        aria-label="Back"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-      </button>
+    <>
+        <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-24">
+          <button 
+            onClick={() => handleNavigate('home')}
+            className="mb-6 p-2 -ml-2 text-gray-500 hover:text-rinklBlue dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+            aria-label="Back"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+          </button>
 
-      <h1 className="text-3xl font-extrabold mb-2">{t.details_rinkl.title}</h1>
-      <p className="text-sm font-mono text-gray-500 dark:text-gray-400 mb-8 uppercase tracking-widest">{t.details_rinkl.release}</p>
-      
-      <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200">
-        {t.details_rinkl.content.map((paragraph, idx) => (
-          <p key={idx} className={paragraph.length < 50 ? "font-bold text-xl mt-6 mb-2" : ""}>
-             {paragraph}
-          </p>
-        ))}
-      </div>
-    </div>
+          <h1 className="text-3xl font-extrabold mb-2">{t.details_rinkl.title}</h1>
+          <p className="text-sm font-mono text-gray-500 dark:text-gray-400 mb-8 uppercase tracking-widest">{t.details_rinkl.release}</p>
+          
+          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200 mb-20">
+            {t.details_rinkl.content.map((paragraph, idx) => (
+              <p key={idx} className={paragraph.length < 50 ? "font-bold text-xl mt-6 mb-2" : ""}>
+                 {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer Button - Fixed outside the animated container */}
+        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-center z-50">
+            <a 
+                href="https://ai.rinkl.ru" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-rinklBlue text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-lg w-full max-w-md text-center"
+            >
+                {t.details_rinkl.button}
+            </a>
+        </div>
+    </>
   );
 
   const DetailsTelegramPage = () => (
-    <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-20">
-      <button 
-        onClick={() => handleNavigate('home')}
-        className="mb-6 p-2 -ml-2 text-gray-500 hover:text-rinklBlue dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
-        aria-label="Back"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-      </button>
-
-      <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-extrabold">{t.details_telegram.title}</h1>
-          <a 
-            href="https://t.me/rinkl_IT" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hidden md:block bg-rinklBlue text-white px-6 py-2 rounded-full font-bold hover:bg-blue-600 transition-colors shadow-lg"
+    <>
+        <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-24">
+          <button 
+            onClick={() => handleNavigate('home')}
+            className="mb-6 p-2 -ml-2 text-gray-500 hover:text-rinklBlue dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+            aria-label="Back"
           >
-            {t.details_telegram.button}
-          </a>
-      </div>
-      
-      <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200 mb-10">
-        {t.details_telegram.content.map((paragraph, idx) => (
-           <p key={idx} className={paragraph.length < 50 ? "font-bold text-xl mt-6 mb-2" : ""}>
-             {paragraph}
-           </p>
-        ))}
-      </div>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+          </button>
 
-      <div className="sticky bottom-8 flex justify-center md:hidden">
-          <a 
-            href="https://t.me/rinkl_IT" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="bg-rinklBlue text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-xl"
-          >
-            {t.details_telegram.button}
-          </a>
-      </div>
-    </div>
+          <div className="flex justify-between items-center mb-6">
+              <h1 className="text-3xl font-extrabold">{t.details_telegram.title}</h1>
+          </div>
+          
+          <div className="space-y-4 text-base md:text-lg leading-relaxed text-gray-800 dark:text-gray-200 mb-20">
+            {t.details_telegram.content.map((paragraph, idx) => (
+               <p key={idx} className={paragraph.length < 50 ? "font-bold text-xl mt-6 mb-2" : ""}>
+                 {paragraph}
+               </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer Button - Fixed outside the animated container */}
+        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-center z-50">
+            <a 
+                href="https://t.me/rinkl_IT" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-rinklBlue text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-lg w-full max-w-md text-center"
+            >
+                {t.details_telegram.button}
+            </a>
+        </div>
+    </>
   );
 
   const AboutPage = () => (
@@ -174,7 +220,7 @@ const App: React.FC = () => {
             {/* Horizontal Line: Arrow gap on Left */}
             <div className="absolute top-1/2 left-2 right-0 h-0.5 bg-rinklBlue transform -translate-y-1/2"></div>
             
-            {/* Start Dot (Founding): On Right */}
+            {/* Start Dot (Founding): On Right (The beginning of the timeline) */}
             <div className="absolute top-1/2 right-0 w-3 h-3 bg-rinklBlue rounded-full transform -translate-y-1/2 translate-x-1/2"></div>
             
             {/* End Arrow (Future): On Left, pointing Left */}
@@ -219,12 +265,7 @@ const App: React.FC = () => {
         </button>
 
         {/* Logo */}
-        <div 
-          onClick={handleLogoClick}
-          className="absolute left-1/2 transform -translate-x-1/2 font-bold text-2xl text-rinklBlue tracking-tight cursor-pointer hover:opacity-80 transition-opacity select-none"
-        >
-          Rinkl
-        </div>
+        <RinklLogo />
 
         {/* Language */}
         <LanguageSelector current={language} onChange={setLanguage} />

@@ -16,6 +16,7 @@ export interface TranslationStructure {
     title: string;
     release: string;
     content: string[]; // We will split paragraphs for easier rendering
+    button: string;
   };
   details_telegram: {
     title: string;

@@ -444,11 +444,12 @@ const ZH_ABOUT_TEXT = `
 export const TRANSLATIONS: Record<Language, TranslationStructure> = {
   ru: {
     menu: { home: 'Главная', support: 'Поддержка', about: 'О нас' },
-    home: { sq1_title: 'Rinkl AI - очень и очень скоро', sq2_title: 'Следите за Rinkl в телеграмм' },
+    home: { sq1_title: 'Rinkl AI - уже тут', sq2_title: 'Следите за Rinkl в телеграмм' },
     details_rinkl: {
       title: 'Rinkl AI',
-      release: 'Релиз — 7 декабря 2025',
-      content: RU_RINKL_TEXT.split('\n').filter(line => line.trim() !== '')
+      release: 'Уже доступно',
+      content: RU_RINKL_TEXT.split('\n').filter(line => line.trim() !== ''),
+      button: 'Попробовать Rinkl AI'
     },
     details_telegram: {
       title: 'Телеграмм канал Rinkl',
@@ -488,11 +489,12 @@ export const TRANSLATIONS: Record<Language, TranslationStructure> = {
   },
   en: {
     menu: { home: 'Home', support: 'Support', about: 'About Us' },
-    home: { sq1_title: 'Rinkl AI - Coming Very Soon', sq2_title: 'Follow Rinkl on Telegram' },
+    home: { sq1_title: 'Rinkl AI - Is Here', sq2_title: 'Follow Rinkl on Telegram' },
     details_rinkl: {
       title: 'Rinkl AI',
-      release: 'Release — December 7, 2025',
-      content: EN_RINKL_TEXT.split('\n').filter(line => line.trim() !== '')
+      release: 'Available Now',
+      content: EN_RINKL_TEXT.split('\n').filter(line => line.trim() !== ''),
+      button: 'Try Rinkl AI'
     },
     details_telegram: {
       title: 'Rinkl Telegram Channel',
@@ -532,11 +534,12 @@ export const TRANSLATIONS: Record<Language, TranslationStructure> = {
   },
   es: {
     menu: { home: 'Inicio', support: 'Soporte', about: 'Sobre Nosotros' },
-    home: { sq1_title: 'Rinkl AI - Muy pronto', sq2_title: 'Sigue a Rinkl en Telegram' },
+    home: { sq1_title: 'Rinkl AI - Ya está aquí', sq2_title: 'Sigue a Rinkl en Telegram' },
     details_rinkl: { 
         title: 'Rinkl AI', 
-        release: 'Lanzamiento — 7 de diciembre de 2025', 
-        content: ES_RINKL_TEXT.split('\n').filter(line => line.trim() !== '') 
+        release: 'Disponible ahora', 
+        content: ES_RINKL_TEXT.split('\n').filter(line => line.trim() !== ''),
+        button: 'Probar Rinkl AI'
     },
     details_telegram: { 
         title: 'Canal de Telegram Rinkl', 
@@ -570,11 +573,12 @@ export const TRANSLATIONS: Record<Language, TranslationStructure> = {
   },
   de: {
     menu: { home: 'Startseite', support: 'Unterstützung', about: 'Über Uns' },
-    home: { sq1_title: 'Rinkl AI - Sehr bald', sq2_title: 'Folgen Sie Rinkl auf Telegram' },
+    home: { sq1_title: 'Rinkl AI - Ist da', sq2_title: 'Folgen Sie Rinkl auf Telegram' },
     details_rinkl: { 
         title: 'Rinkl AI', 
-        release: 'Veröffentlichung — 7. Dezember 2025', 
-        content: DE_RINKL_TEXT.split('\n').filter(line => line.trim() !== '') 
+        release: 'Jetzt verfügbar', 
+        content: DE_RINKL_TEXT.split('\n').filter(line => line.trim() !== ''),
+        button: 'Rinkl AI ausprobieren'
     },
     details_telegram: { 
         title: 'Rinkl Telegram-Kanal', 
@@ -608,11 +612,12 @@ export const TRANSLATIONS: Record<Language, TranslationStructure> = {
   },
   zh: {
     menu: { home: '首页', support: '支持', about: '关于我们' },
-    home: { sq1_title: 'Rinkl AI - 即将推出', sq2_title: '在 Telegram 上关注 Rinkl' },
+    home: { sq1_title: 'Rinkl AI - 已上线', sq2_title: '在 Telegram 上关注 Rinkl' },
     details_rinkl: { 
         title: 'Rinkl AI', 
-        release: '发布 — 2025年12月7日', 
-        content: ZH_RINKL_TEXT.split('\n').filter(line => line.trim() !== '') 
+        release: '现已可用', 
+        content: ZH_RINKL_TEXT.split('\n').filter(line => line.trim() !== ''),
+        button: '试用 Rinkl AI'
     },
     details_telegram: { 
         title: 'Rinkl Telegram 频道', 
