@@ -74,19 +74,19 @@
 <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
     "firebase/": "https://aistudiocdn.com/firebase@^12.6.0/"
   }
 }
 </script>
 </head>
 <body class="bg-[#f5f7fa] dark:bg-gray-900 text-[#333] dark:text-gray-100 transition-colors duration-200">
-    <div id="root"></div>
+    <div id="root" class="h-full"></div>
 
     <script type="text/babel" data-presets="react,typescript">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, Fragment } = React;
 
         // --- FIREBASE SETUP ---
         const firebaseConfig = {
@@ -534,7 +534,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
 `;
 
         const ZH_ABOUT_TEXT = `
-我们是 Rinkl, 一家充满前景的科技初创公司，致力于创造创新的 IT 产品。
+我们是 Rinkl，一家充满前景的科技初创公司，致力于创造创新的 IT 产品。
 我们的使命是化繁为简，让技术触手可及，为现实问题提供智能且优雅的解决方案。
 
 我们利用最现代的技术和先进的开发方法，创造能够帮助人们更高效工作、更具创造性思维并实现更多目标的产品。
@@ -547,6 +547,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
 
 在 Rinkl，我们相信技术应该是智能、清晰且有用的，我们创造的产品为全球用户开启新的可能性。
 `;
+
 
         const TRANSLATIONS = {
           ru: {
@@ -783,7 +784,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
               </button>
 
               {isOpen && (
-                <React.Fragment>
+                <>
                     <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}></div>
                     <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-20 border border-gray-100 dark:border-gray-700">
                     {langs.map((l) => (
@@ -803,7 +804,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                         </button>
                     ))}
                     </div>
-                </React.Fragment>
+                </>
               )}
             </div>
           );
@@ -815,12 +816,14 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
           if (!isOpen) return null;
 
           return (
-            <React.Fragment>
+            <>
+              {/* Backdrop */}
               <div 
                 className="fixed inset-0 bg-black/50 z-40 transition-opacity"
                 onClick={onClose}
               />
               
+              {/* Drawer */}
               <div className="fixed top-0 left-0 bottom-0 w-1/2 bg-white dark:bg-gray-800 z-50 shadow-2xl flex flex-col pt-20 px-6 transform transition-transform duration-300 ease-in-out">
                 <nav className="flex flex-col space-y-6">
                   <button 
@@ -857,7 +860,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                   </button>
                 </nav>
               </div>
-            </React.Fragment>
+            </>
           );
         };
 
@@ -869,6 +872,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
           const [reviews, setReviews] = useState([]);
           const [isSending, setIsSending] = useState(false);
           
+          // Persistent User ID logic
           const [userId] = useState(() => {
             let uid = localStorage.getItem('userId');
             if (!uid) {
@@ -944,6 +948,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
             <div className="flex-1 w-full max-w-2xl mx-auto p-4 md:p-6 pb-20 animate-fade-in">
                 <h2 className="text-2xl font-bold mb-6 text-center">{t.title}</h2>
 
+                {/* Input Form */}
                 <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 mb-8">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
@@ -997,12 +1002,14 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                     </form>
                 </div>
                 
+                {/* Notification Toast */}
                 {status.msg && (
                     <div className={`mb-6 p-4 rounded-lg text-center font-medium animate-fade-in border ${status.type === 'error' ? 'bg-red-50 border-red-100 text-red-700 dark:bg-red-900/30 dark:border-red-800 dark:text-red-300' : 'bg-green-50 border-green-100 text-green-700 dark:bg-green-900/30 dark:border-green-800 dark:text-green-300'}`}>
                         {status.msg}
                     </div>
                 )}
 
+                {/* Message History */}
                 <div className="space-y-4">
                     <div className="flex items-center gap-4">
                         <div className="h-px bg-gray-200 dark:bg-gray-700 flex-1"></div>
@@ -1070,6 +1077,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
           const [view, setView] = useState('home');
           const [isMenuOpen, setIsMenuOpen] = useState(false);
           
+          // Theme Handling (System Dark Mode)
           useEffect(() => {
             const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
             const handleChange = (e) => {
@@ -1080,6 +1088,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
               }
             };
             
+            // Initial check
             if (mediaQuery.matches) {
               document.documentElement.classList.add('dark');
             }
@@ -1100,6 +1109,46 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
 
           const t = TRANSLATIONS[language];
 
+          // --- Sub-components ---
+
+          const Snow = () => {
+            // Increased flakes from 40 to 60 (1.5x)
+            const [flakes] = useState(() => Array.from({ length: 60 }).map((_, i) => ({
+              id: i,
+              left: Math.random() * 100 + '%',
+              animationDuration: Math.random() * 5 + 5 + 's', // 5-10s
+              animationDelay: Math.random() * 5 + 's',
+              fontSize: Math.random() * 10 + 10 + 'px',
+              opacity: Math.random() * 0.5 + 0.3
+            })));
+
+            return (
+              <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden" aria-hidden="true">
+                {flakes.map((flake) => (
+                  <div
+                    key={flake.id}
+                    className="absolute top-[-20px] text-blue-200 dark:text-white/20 select-none"
+                    style={{
+                      left: flake.left,
+                      fontSize: flake.fontSize,
+                      opacity: flake.opacity,
+                      animation: `snowfall ${flake.animationDuration} linear infinite`,
+                      animationDelay: flake.animationDelay,
+                    }}
+                  >
+                    ❄
+                  </div>
+                ))}
+                <style>{`
+                  @keyframes snowfall {
+                    0% { transform: translateY(-10vh) rotate(0deg); }
+                    100% { transform: translateY(110vh) rotate(360deg); }
+                  }
+                `}</style>
+              </div>
+            );
+          };
+          
           const RinklLogo = () => (
             <div 
               onClick={handleLogoClick}
@@ -1129,11 +1178,12 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
               </div>
             </div>
           );
-
+          
           const HomePage = () => (
             <div className="flex flex-col justify-center min-h-[70vh] max-w-5xl mx-auto px-6 py-12 animate-fade-in">
               <div className="flex flex-col space-y-12 md:space-y-16">
                 
+                {/* Item 1 */}
                 <div 
                   onClick={() => handleNavigate('details_rinkl')}
                   className="group cursor-pointer"
@@ -1150,6 +1200,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                   </div>
                 </div>
 
+                {/* Item 2 */}
                 <div 
                   onClick={() => handleNavigate('details_telegram')}
                   className="group cursor-pointer"
@@ -1171,7 +1222,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
           );
 
           const DetailsRinklPage = () => (
-            <React.Fragment>
+            <>
                 <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-24">
                   <button 
                     onClick={() => handleNavigate('home')}
@@ -1195,9 +1246,10 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                   </div>
                 </div>
 
+                {/* Footer Button - Fixed outside the animated container */}
                 <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-center z-50">
                     <a 
-                        href="https://rinkl-ai.vercel.app" 
+                        href="https://www.ai.rinkl.ru" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="bg-rinklBlue text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-lg w-full max-w-md text-center"
@@ -1205,11 +1257,11 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                         {t.details_rinkl.button}
                     </a>
                 </div>
-            </React.Fragment>
+            </>
           );
 
           const DetailsTelegramPage = () => (
-            <React.Fragment>
+            <>
                 <div className="p-4 md:p-8 max-w-3xl mx-auto animate-fade-in pb-24">
                   <button 
                     onClick={() => handleNavigate('home')}
@@ -1234,6 +1286,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                   </div>
                 </div>
 
+                {/* Footer Button - Fixed outside the animated container */}
                 <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-center z-50">
                     <a 
                         href="https://t.me/rinkl_IT" 
@@ -1244,7 +1297,7 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                         {t.details_telegram.button}
                     </a>
                 </div>
-            </React.Fragment>
+            </>
           );
 
           const AboutPage = () => (
@@ -1259,25 +1312,32 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                     ))}
                 </div>
 
+                {/* Timeline (Mirrored: Starts Right, Ends Left) */}
                 <div className="relative w-full h-48 mt-24 mb-12 select-none">
+                    {/* Horizontal Line: Arrow gap on Left */}
                     <div className="absolute top-1/2 left-2 right-0 h-0.5 bg-rinklBlue transform -translate-y-1/2"></div>
                     
+                    {/* Start Dot (Founding): On Right (The beginning of the timeline) */}
                     <div className="absolute top-1/2 right-0 w-3 h-3 bg-rinklBlue rounded-full transform -translate-y-1/2 translate-x-1/2"></div>
                     
+                    {/* End Arrow (Future): On Left, pointing Left */}
                     <div className="absolute top-1/2 left-0 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[12px] border-r-rinklBlue transform -translate-y-1/2"></div>
 
+                    {/* Label 1: Founding (At Start/Right) - Above */}
                     <div className="absolute top-1/2 right-0 transform -translate-y-full pb-6 translate-x-2">
                         <p className="text-xs md:text-sm whitespace-pre-line text-gray-900 dark:text-white font-bold leading-tight text-right">
                             {t.about.timeline.t1}
                         </p>
                     </div>
 
+                    {/* Label 2: Release (At 25% from Right) - Below */}
                     <div className="absolute top-1/2 right-[25%] transform pt-6 translate-x-1/2">
                         <p className="text-xs md:text-sm whitespace-pre-line text-gray-900 dark:text-white font-bold leading-tight text-center">
                             {t.about.timeline.t2}
                         </p>
                     </div>
 
+                    {/* Label 3: Future (At End/Left) - Above */}
                     <div className="absolute top-1/2 left-0 transform -translate-y-full pb-6 -translate-x-2">
                         <p className="text-xs md:text-sm whitespace-pre-line text-gray-900 dark:text-white font-bold leading-tight text-left">
                             {t.about.timeline.t3}
@@ -1289,7 +1349,10 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
 
           return (
             <div className="min-h-screen flex flex-col bg-[#f5f7fa] dark:bg-gray-900 text-[#333] dark:text-gray-100">
+              <Snow />
+              {/* Header */}
               <header className="sticky top-0 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 py-3 h-16 flex items-center justify-between">
+                {/* Burger */}
                 <button 
                   onClick={() => setIsMenuOpen(true)}
                   className="p-2 -ml-2 text-gray-700 dark:text-white"
@@ -1299,11 +1362,14 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                   </svg>
                 </button>
 
+                {/* Logo */}
                 <RinklLogo />
 
+                {/* Language */}
                 <LanguageSelector current={language} onChange={setLanguage} />
               </header>
 
+              {/* Menu Overlay */}
               <Menu 
                 isOpen={isMenuOpen} 
                 currentView={view} 
@@ -1312,7 +1378,8 @@ Rinkl Telegram 频道是公告和新闻最先出现的地方。
                 onClose={() => setIsMenuOpen(false)} 
               />
 
-              <main className="flex-1 overflow-x-hidden">
+              {/* Content */}
+              <main className="flex-1 overflow-x-hidden relative z-10">
                 {view === 'home' && <HomePage />}
                 {view === 'support' && <Support language={language} />}
                 {view === 'details_rinkl' && <DetailsRinklPage />}

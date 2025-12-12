@@ -44,6 +44,44 @@ const App: React.FC = () => {
   const t = TRANSLATIONS[language];
 
   // --- Sub-components ---
+
+  const Snow = () => {
+    // Increased flakes from 40 to 60 (1.5x)
+    const [flakes] = useState(() => Array.from({ length: 60 }).map((_, i) => ({
+      id: i,
+      left: Math.random() * 100 + '%',
+      animationDuration: Math.random() * 5 + 5 + 's', // 5-10s
+      animationDelay: Math.random() * 5 + 's',
+      fontSize: Math.random() * 10 + 10 + 'px',
+      opacity: Math.random() * 0.5 + 0.3
+    })));
+
+    return (
+      <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden" aria-hidden="true">
+        {flakes.map((flake) => (
+          <div
+            key={flake.id}
+            className="absolute top-[-20px] text-blue-200 dark:text-white/20 select-none"
+            style={{
+              left: flake.left,
+              fontSize: flake.fontSize,
+              opacity: flake.opacity,
+              animation: `snowfall ${flake.animationDuration} linear infinite`,
+              animationDelay: flake.animationDelay,
+            }}
+          >
+            ❄
+          </div>
+        ))}
+        <style>{`
+          @keyframes snowfall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  };
   
   const RinklLogo = () => (
     <div 
@@ -145,7 +183,7 @@ const App: React.FC = () => {
         {/* Footer Button - Fixed outside the animated container */}
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 flex justify-center z-50">
             <a 
-                href="https://rinkl-ai.vercel.app" 
+                href="https://www.ai.rinkl.ru" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-rinklBlue text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-blue-600 transition-colors shadow-lg w-full max-w-md text-center"
@@ -245,6 +283,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f5f7fa] dark:bg-gray-900 text-[#333] dark:text-gray-100">
+      <Snow />
       {/* Header */}
       <header className="sticky top-0 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 py-3 h-16 flex items-center justify-between">
         {/* Burger */}
@@ -274,7 +313,7 @@ const App: React.FC = () => {
       />
 
       {/* Content */}
-      <main className="flex-1 overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden relative z-10">
         {view === 'home' && <HomePage />}
         {view === 'support' && <Support language={language} />}
         {view === 'details_rinkl' && <DetailsRinklPage />}
